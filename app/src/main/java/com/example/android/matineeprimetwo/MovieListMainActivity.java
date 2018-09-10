@@ -44,6 +44,7 @@ import static com.example.android.matineeprimetwo.StringUrlConstants.TOP_RATED_M
 
 public class MovieListMainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
+    private final String KEY_RECYCLER_STATE = "recycler_state";
     private RecyclerView recyclerView;
     private MovieAdapter adapter;
     private List<MovieList> movieLists;
@@ -51,6 +52,7 @@ public class MovieListMainActivity extends AppCompatActivity {
     private Button mRefreshButton;
     private ProgressBar mNetworkLoadProgressBar;
     private TextView mErrorTextView;
+    private Parcelable listState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +132,7 @@ public class MovieListMainActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 mErrorTextView.setVisibility(View.VISIBLE);
                 mRefreshButton.setVisibility(View.VISIBLE);
-                Toast.makeText(MovieListMainActivity.this, "Error! couldn't process" + error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MovieListMainActivity.this, R.string.error_msg + error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -141,7 +143,15 @@ public class MovieListMainActivity extends AppCompatActivity {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(PARCEL_KEY, (ArrayList<? extends Parcelable>) movieLists);
+        listState = recyclerView.getLayoutManager().onSaveInstanceState();
+        outState.putParcelable(KEY_RECYCLER_STATE, listState);
     }
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        if (state != null)
+            listState = state.getParcelable(KEY_RECYCLER_STATE);
+    }
+
     private void setupViewModel() {
         MovieViewModel viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         viewModel.getTasks().observe(this, new Observer<List<MovieList>>() {
@@ -184,6 +194,14 @@ public class MovieListMainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (listState != null)
+            recyclerView.getLayoutManager().onRestoreInstanceState(listState);
     }
 
     @Override

@@ -10,8 +10,11 @@ public abstract class MovieDB extends RoomDatabase {
     public abstract MovieDao getMovieDao();
     private static MovieDB INSTANCE;
     public static MovieDB getInstance(Context context) {
-        if (INSTANCE == null)
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), MovieDB.class, StringUrlConstants.DB_NAME).build();
+        if (INSTANCE == null) {
+            synchronized (MovieDB.class) {
+                INSTANCE = Room.databaseBuilder(context.getApplicationContext(), MovieDB.class, StringUrlConstants.DB_NAME).build();
+            }
+        }
         return INSTANCE;
     }
     public static void destroyInstance() {

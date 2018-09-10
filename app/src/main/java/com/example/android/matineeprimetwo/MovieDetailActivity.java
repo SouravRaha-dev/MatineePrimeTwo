@@ -50,7 +50,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private ReviewAdapter adapter2;
     private TextView favTV;
     private ImageView favView;
-    private boolean isFavorite = false, update;
+    private boolean isFavorite = false;
     private MovieDao mMovieDao;
     private MovieList movieList;
 
@@ -189,20 +189,19 @@ public class MovieDetailActivity extends AppCompatActivity {
                         if (!isFavorite) {
                             try {
                                 mMovieDao.insert(movieList);
-//                              setResult(RESULT_OK);
                             } catch (SQLiteConstraintException e) {
-                                Snackbar.make(v.getRootView(), "A movie with same details already exists.", Snackbar.LENGTH_SHORT).show();
+                                Snackbar.make(v.getRootView(), R.string.same_movie, Snackbar.LENGTH_SHORT).show();
                             }
                             favView.setImageResource(R.drawable.fav_fill);
                             favTV.setVisibility(View.GONE);
-                            Snackbar.make(v.getRootView(),"Added to favorites", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(v.getRootView(), R.string.added_fav, Snackbar.LENGTH_SHORT).show();
                             isFavorite = true;
                         } else {
                             mMovieDao.delete(movieList);
                             favTV.setVisibility(View.VISIBLE);
                             favView.setImageResource(R.drawable.fav_empty);
                             setResult(RESULT_OK);
-                            Snackbar.make(v.getRootView(),"Removed from favorites", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(v.getRootView(), R.string.removed_fav, Snackbar.LENGTH_SHORT).show();
                             isFavorite = false;
                             setupViewModel();
                         }

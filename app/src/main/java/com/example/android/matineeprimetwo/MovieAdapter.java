@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
-    public static final String KEY_NAME = "name", KEY_IMAGE = "image", KEY_DESCRIPTION = "description", KEY_VOTE_AVERAGE= "vote_average", KEY_RELEASE_DATE= "release_date";
     private List<MovieList> movieLists;
     private Context context;
     public MovieAdapter(List<MovieList> movieLists, Context context) {
