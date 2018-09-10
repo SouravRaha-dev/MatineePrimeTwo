@@ -13,7 +13,6 @@ import java.util.List;
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder> {
     private List<ReviewList> reviewsLists;
     private Context context;
-    private final String YOUTUBE_THUMBNAIL_URL = "http://img.youtube.com/vi/%s/0.jpg";
     public ReviewAdapter(List<ReviewList> reviewsLists, Context context){
         this.reviewsLists = reviewsLists;
         this.context = context;

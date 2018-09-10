@@ -51,10 +51,8 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView favTV;
     private ImageView favView;
     private boolean isFavorite = false, update;
-    private MovieDB movieDatabase;
     private MovieDao mMovieDao;
-    private MovieList movie, movieList;
-    public static String stringT;
+    private MovieList movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +68,6 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView ratingTV= findViewById(R.id.rating_value);
         TextView description = findViewById(R.id.synopsis_text);
         favTV = findViewById(R.id.tVFav);
-        ImageView trailerVV = findViewById(R.id.videoViewTrailer);
         recyclerViewTr = findViewById(R.id.trailerRV);
         recyclerViewTr.setHasFixedSize(false);
         recyclerViewTr.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
@@ -78,17 +75,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         trailerLists = new ArrayList<>();
         recyclerViewRV = findViewById(R.id.reviewsRV);
         recyclerViewRV.setHasFixedSize(false);
-        recyclerViewRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewRV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerViewRV.setItemAnimator(new DefaultItemAnimator());
         reviewsLists = new ArrayList<>();
-
-//        Intent intent = getIntent();
-//        final String titleText = intent.getStringExtra(MovieAdapter.KEY_NAME);
-//        String image = intent.getStringExtra(MovieAdapter.KEY_IMAGE);
-//        final String descriptionText = intent.getStringExtra(MovieAdapter.KEY_DESCRIPTION);
-//        final String ratings =intent.getStringExtra(MovieAdapter.KEY_VOTE_AVERAGE)+" / 10";
-//        final String releaseDate=intent.getStringExtra(MovieAdapter.KEY_RELEASE_DATE);
-
         Bundle data = getIntent().getExtras();
         assert data != null;
         movieList= data.getParcelable(StringUrlConstants.PARCEL_KEY);

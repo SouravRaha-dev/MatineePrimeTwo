@@ -106,7 +106,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/synopsis_head_style"
+            style="@style/other_head_style"
             android:text="@string/synopsis"/>
 
         <TextView
@@ -118,7 +118,7 @@
 
         <TextView
             android:id="@+id/tVTrailer"
-            style="@style/head_style"
+            style="@style/other_head_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/trailers" />
@@ -126,7 +126,7 @@
         <LinearLayout
             android:id="@+id/trailerLL"
             android:layout_width="match_parent"
-            android:layout_height="130dp">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/trailerRV"
@@ -136,7 +136,7 @@
 
         <TextView
             android:id="@+id/tVReviews"
-            style="@style/head_style"
+            style="@style/other_head_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/other_margin"

@@ -23,11 +23,10 @@
                 android:id="@+id/authorTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/head_style"
                 android:layout_marginLeft="8dp"
-                android:textColor="#ffffff"
                 android:layout_marginTop="8dp"
                 android:text="@string/author"
-                android:textStyle="bold"
                 android:layout_marginStart="8dp" />
 
             <TextView
@@ -53,8 +52,9 @@
 
                 <TextView
                     android:id="@+id/contentTv"
+                    style="@style/text_value"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:textColor="#ffffff"
                     android:layout_alignParentTop="true"
                     tools:text="@string/author"

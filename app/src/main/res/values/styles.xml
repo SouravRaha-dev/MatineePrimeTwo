@@ -24,7 +24,7 @@
         <item name="android:textColor">@color/whiteFont</item>
     </style>
 
-    <style name="synopsis_head_style">
+    <style name="other_head_style">
         <item name="android:layout_marginTop">@dimen/synopsis_head</item>
         <item name="android:textColor">@color/whiteFont</item>
         <item name="android:textSize">@dimen/synopsis_head_dimen</item>
