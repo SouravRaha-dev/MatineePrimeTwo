@@ -139,7 +139,7 @@ public class MovieListMainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    @Override
+    /*@Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(PARCEL_KEY, (ArrayList<? extends Parcelable>) movieLists);
@@ -150,7 +150,7 @@ public class MovieListMainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(state);
         if (state != null)
             listState = state.getParcelable(KEY_RECYCLER_STATE);
-    }
+    }*/
 
     private void setupViewModel() {
         MovieViewModel viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
