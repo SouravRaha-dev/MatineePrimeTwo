@@ -3,7 +3,7 @@ package com.example.android.matineeprimetwo;
 public class StringUrlConstants {
 
     //TODO: Get your own API Key and paste it in the API_KEY String
-    public static final String API_KEY = "7c9d117f70c51ce9098642e0dbf22427";
+    public static final String API_KEY = "";
     public static boolean FAV = false;
     public static final String BASE_URL_MOVIE = "https://api.themoviedb.org/3/discover/movie?api_key=";
     public static final String POPULAR_MOVIES_URL = "https://api.themoviedb.org/3/movie/popular?api_key=";
