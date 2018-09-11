@@ -62,10 +62,10 @@ public class MovieDetailActivity extends AppCompatActivity {
         createActivityUI();
     }
     public void createActivityUI() {
-        ImageView posterBannerIV= findViewById(R.id.movie_poster);
+        ImageView posterBannerIV = findViewById(R.id.movie_poster);
         TextView titleTextView = findViewById(R.id.movie_title);
-        TextView releaseTV= findViewById(R.id.release_date);
-        TextView ratingTV= findViewById(R.id.rating_value);
+        TextView releaseTV = findViewById(R.id.release_date);
+        TextView ratingTV = findViewById(R.id.rating_value);
         TextView description = findViewById(R.id.synopsis_text);
         favTV = findViewById(R.id.tVFav);
         recyclerViewTr = findViewById(R.id.trailerRV);
@@ -80,7 +80,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         reviewsLists = new ArrayList<>();
         Bundle data = getIntent().getExtras();
         assert data != null;
-        movieList= data.getParcelable(StringUrlConstants.PARCEL_KEY);
+        movieList = data.getParcelable(StringUrlConstants.PARCEL_KEY);
         assert movieList != null;
         idVal = movieList.getId();
         final String titleText = movieList.getTitle();

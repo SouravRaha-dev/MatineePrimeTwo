@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_movie_projector"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
-        <activity android:name=".MovieListMainActivity">
+        <activity
+            android:name=".MovieListMainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
