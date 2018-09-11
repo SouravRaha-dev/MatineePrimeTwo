@@ -69,13 +69,19 @@ public class MovieListMainActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         movieLists = new ArrayList<>();
         mMovieDao = Room.databaseBuilder(this, MovieDB.class, DB_NAME).allowMainThreadQueries().build().getMovieDao();
-        if (savedInstanceState != null){
+        if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(PARCEL_KEY)) {
                 movieLists = savedInstanceState.getParcelableArrayList(PARCEL_KEY);
                 adapter = new MovieAdapter(movieLists, getApplicationContext());
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
+        }
+        else {
+            if (FAV)
+                loadFavMovies();
+            else
+                loadUrlData(BASE_URL_MOVIE);
         }
         mRefreshButton.setOnClickListener(new View.OnClickListener() {
 
@@ -84,10 +90,6 @@ public class MovieListMainActivity extends AppCompatActivity {
                 loadFavMovies();
             }
         });
-        if (FAV)
-            loadFavMovies();
-        else
-            loadUrlData(BASE_URL_MOVIE);
     }
     public void loadFavMovies() {
         mErrorTextView.setVisibility(View.INVISIBLE);
@@ -139,19 +141,20 @@ public class MovieListMainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    /*@Override
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(PARCEL_KEY, (ArrayList<? extends Parcelable>) movieLists);
         listState = recyclerView.getLayoutManager().onSaveInstanceState();
         outState.putParcelable(KEY_RECYCLER_STATE, listState);
     }
+
+    @Override
     protected void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
         if (state != null)
             listState = state.getParcelable(KEY_RECYCLER_STATE);
-    }*/
-
+    }
     private void setupViewModel() {
         MovieViewModel viewModel = ViewModelProviders.of(this).get(MovieViewModel.class);
         viewModel.getTasks().observe(this, new Observer<List<MovieList>>() {

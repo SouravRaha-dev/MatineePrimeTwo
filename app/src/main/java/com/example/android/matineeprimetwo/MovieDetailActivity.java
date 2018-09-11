@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,6 +54,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private boolean isFavorite = false;
     private MovieDao mMovieDao;
     private MovieList movieList;
+    private ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         TextView releaseTV = findViewById(R.id.release_date);
         TextView ratingTV = findViewById(R.id.rating_value);
         TextView description = findViewById(R.id.synopsis_text);
+        scrollView = findViewById(R.id.scroll_view);
         favTV = findViewById(R.id.tVFav);
         recyclerViewTr = findViewById(R.id.trailerRV);
         recyclerViewTr.setHasFixedSize(false);
@@ -220,5 +223,19 @@ public class MovieDetailActivity extends AppCompatActivity {
             }
         });
     }
-
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putIntArray("ARTICLE_SCROLL_POSITION", new int[]{ scrollView.getScrollX(), scrollView.getScrollY()});
+    }
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        final int[] position = savedInstanceState.getIntArray("ARTICLE_SCROLL_POSITION");
+        if (position != null) {
+            scrollView.postDelayed(new Runnable() {
+                public void run() {
+                    scrollView.scrollTo(position[0], position[1]);
+                }
+            }, 100);
+        }
+    }
 }
